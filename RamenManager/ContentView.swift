@@ -8,9 +8,27 @@
 import SwiftUI
 
 struct ContentView: View {
+    
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        TabView {
+            HomeView()
+                .tabItem {
+                    Label("Home", systemImage: "house.fill")
+                }
+            CouponsView()
+                .tabItem {
+                    Label("Coupons", systemImage: "cart.fill")
+                }
+            LogView()
+                .tabItem {
+                    Label("History", systemImage: "book.closed.fill")
+                }
+            SettingsView()
+                .tabItem {
+                    Label("Settings", systemImage: "gearshape.fill")
+                }
+        }
+        .accentColor(.green)
     }
 }
 
