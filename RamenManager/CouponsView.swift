@@ -7,17 +7,24 @@
 
 import SwiftUI
 
-struct Response: Codable {
-    var results: [Result]
-}
-
 struct Result: Codable {
     var result: Bool
+    var offers : [Offer]
+}
+
+struct Offer : Codable {
+    var lmd_id : String
+    var store : String
+    var merchant_homepage : String
+    var offer_text : String
+    var offer_value : String
+    var title : String
+    var description : String
 }
 
 
 struct CouponsView: View {
-    @State private var results = [Result]()
+    @State private var results : Result = Result(result: false, offers: [])
 
     var body: some View {
         if #available(iOS 15.0, *) {
@@ -29,12 +36,12 @@ struct CouponsView: View {
                     Spacer()
                 }.padding()
                 
-                List(results, id: \.result) { item in
-                    VStack(alignment: .leading) {
-                        Text("hello")
-                            .font(.headline)
-                    }
-                }
+//                List(results, id: \.result) { item in
+//                    VStack(alignment: .leading) {
+//                        Text("hello")
+//                            .font(.headline)
+//                    }
+//                }
                 .task {
                     await loadData()
                 }
@@ -70,10 +77,10 @@ struct CouponsView: View {
             // more code to come
             print(data)
             print("we are getting here!!!")
-            if let decodedResponse = try? JSONDecoder().decode(Response.self, from: data) {
-                results = decodedResponse.results
+            if let decodedResponse = try? JSONDecoder().decode(Result.self, from: data) {
+                //results = decodedResponse.results
             }
-            print(results.count)
+            //print(results.count)
         } catch {
             print("Invalid data")
         }
