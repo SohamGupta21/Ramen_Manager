@@ -25,6 +25,17 @@ struct SettingsView: View {
             HStack {
                 TextField("Weekly Income", text: $weeklyIncome, onCommit: {
                     userData.weeklyIncome = Float(self.weeklyIncome) ?? 0
+                    userData.progressValue = Float(moneySpentToday(ud: userData)) / Float(calculateDailyBalance(uD: userData))
+                    
+                    userData.currentColor = .green
+                    
+                    if userData.progressValue > 0.5 {
+                        userData.currentColor = .yellow
+                    }
+                    
+                    if userData.progressValue > 0.75 {
+                        userData.currentColor = .red
+                    }
                 })
                 .padding()
             }.modifier(customViewModifier(roundedCornes: 6, startColor: .green, endColor: .green, textColor: .white))

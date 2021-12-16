@@ -15,10 +15,10 @@ struct ContentView: View {
                 .tabItem {
                     Label("Home", systemImage: "house.fill")
                 }
-//            CouponsView()
-//                .tabItem {
-//                    Label("Coupons", systemImage: "cart.fill")
-//                }
+            CouponsView()
+                .tabItem {
+                    Label("Coupons", systemImage: "cart.fill")
+                }
             LogView()
                 .tabItem {
                     Label("History", systemImage: "book.closed.fill")
