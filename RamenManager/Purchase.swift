@@ -10,9 +10,9 @@ import Foundation
 class Purchase {
     var description: String
     var date: Date
-    var price: Float
+    var price: Double
     
-    init(description:String, date:Date, price:Float){
+    init(description:String, date:Date, price:Double){
         self.description = description
         self.date = date
         self.price = price
