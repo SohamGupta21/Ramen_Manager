@@ -24,10 +24,17 @@ struct AddPurchaseView: View {
             }
             Text("Add a new purchase")
                 .font(.title)
-            TextField("Description", text: $description)
+            
+            HStack {
+                TextField("Description", text: $description)
                 .padding()
-            TextField("Price", text: $price)
+            }.modifier(customViewModifier(roundedCornes: 6, startColor: .green, endColor: .green, textColor: .white))
+            
+            HStack {
+                TextField("Price", text: $price)
                 .padding()
+            }.modifier(customViewModifier(roundedCornes: 6, startColor: .green, endColor: .green, textColor: .white))
+            
             Button(action: {
                 userData.purchases.append(Purchase(description: description, date: Date(), price: Double(price) ?? 0))
                 userData.progressValue = Float(moneySpentToday(ud: userData)) / Float(calculateDailyBalance(uD: userData))

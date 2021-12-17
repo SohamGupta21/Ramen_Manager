@@ -13,6 +13,7 @@ class UserData : ObservableObject {
     @Published var weeklyIncome: Float
     @Published var purchases: [Purchase]
     @Published var progressValue : Float
+    @Published var offers : [Offer]
     @Published var currentColor : Color {
         didSet {
             objectWillChange.send()
@@ -24,6 +25,7 @@ class UserData : ObservableObject {
         self.purchases = purchases
         self.progressValue = 0
         self.currentColor = .green
+        self.offers = []
     }
     
     

@@ -7,25 +7,11 @@
 
 import SwiftUI
 
-struct Result: Codable {
-    var result: Bool
-    var offers : [Offer]
-}
-
-struct Offer : Codable {
-    var lmd_id : String
-    var store : String
-    var merchant_homepage : String
-    var offer_text : String
-    var offer_value : String
-    var title : String
-    var description : String
-}
-
 
 struct CouponsView: View {
     @State private var results : Result = Result(result: false, offers: [])
-
+    @State var offers = [Offer]()
+    @State var search = ""
     var body: some View {
         if #available(iOS 15.0, *) {
             VStack{
@@ -34,29 +20,31 @@ struct CouponsView: View {
                         .font(.title)
                         .fontWeight(.bold)
                     Spacer()
-                }.padding()
-                
-//                List(results, id: \.result) { item in
-//                    VStack(alignment: .leading) {
-//                        Text("hello")
-//                            .font(.headline)
-//                    }
-//                }
-                .task {
-                    await loadData()
                 }
-              
-//                List {
-//                    Section(header: Text("Bananas")) {
-//                      Text("Buy one get one Free at Kohls")
-//                    }
-//                    Section(header: Text("Bananas")) {
-//                      Text("Buy one get one Free at Kohls")
-//                    }
-//                    Section(header: Text("Bananas")) {
-//                      Text("Buy one get one Free at Kohls")
-//                    }
-//                }
+                .padding()
+                .onAppear() {
+                    Api().loadData { (offers) in
+                        self.offers = offers
+                    }
+                }
+                HStack {
+                    TextField("Search", text: $search, onCommit: {
+//                        for 0..<offers.co {
+//                            if !o.store.contains(search) {
+//                                offers.remove(at: <#T##Int#>)
+//                            }
+//                        }
+                    })
+                    .padding()
+                }.modifier(customViewModifier(roundedCornes: 6, startColor: .green, endColor: .green, textColor: .white))
+                List {
+                    Section(header:Text("Offers")) {
+                        ForEach(0 ..< offers.count, id: \.self) {offer in
+                            CouponCardView(offer: offers[offer])
+                        }
+                        .listRowBackground(Color.white)
+                    }
+                }.listStyle(.plain)
             }
            
         }
