@@ -26,9 +26,9 @@ struct Offer : Codable{
 
 class Api : ObservableObject{
     @Published var offers = [Offer]()
-    
+
     func loadData(completion:@escaping ([Offer]) -> ()) {
-        guard let url = URL(string: "http://feed.linkmydeals.com/getOffers/?API_KEY=8cd0c17a42efd851c28c9782060e5e03&&format=json") else {
+        guard let url = URL(string: "http://feed.linkmydeals.com/getOffers/?API_KEY=6a7e5da2bfe75fcb486f66f09624af16&&format=json") else {
             print("Invalid url...")
             return
         }

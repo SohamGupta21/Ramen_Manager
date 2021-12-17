@@ -11,6 +11,7 @@ import SwiftUI
 struct CouponsView: View {
     @State private var results : Result = Result(result: false, offers: [])
     @State var offers = [Offer]()
+    @State var unusedOffers = [Offer]()
     @State var search = ""
     var body: some View {
         if #available(iOS 15.0, *) {
@@ -27,16 +28,18 @@ struct CouponsView: View {
                         self.offers = offers
                     }
                 }
-                HStack {
-                    TextField("Search", text: $search, onCommit: {
-//                        for 0..<offers.co {
-//                            if !o.store.contains(search) {
-//                                offers.remove(at: <#T##Int#>)
+//                HStack {
+//                    TextField("Search", text: $search, onCommit: {
+//                        unusedOffers = []
+//                        for n in 0..<offers.count {
+//                            if !offers[n].store.contains(search) {
+//                                unusedOffers.append(offers[n])
+//                                offers.remove(at: n)
 //                            }
 //                        }
-                    })
-                    .padding()
-                }.modifier(customViewModifier(roundedCornes: 6, startColor: .green, endColor: .green, textColor: .white))
+//                    })
+//                    .padding()
+//                }.modifier(customViewModifier(roundedCornes: 6, startColor: .green, endColor: .green, textColor: .white))
                 List {
                     Section(header:Text("Offers")) {
                         ForEach(0 ..< offers.count, id: \.self) {offer in
